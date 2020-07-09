@@ -6,7 +6,6 @@ import { SelectField } from "./SelectField.js";
 import { SelectOptionField } from "./SelectOptionField.js";
 import { CheckboxField } from "./CheckboxField.js";
 import { TextAreaField } from "./TextAreaField.js";
-import { LocStorage } from "./LocStorage.js";
 export class App {
     constructor() {
         this.form = new Form();
@@ -22,9 +21,6 @@ export class App {
         this.form.Fields.push(new CheckboxField("yes", "Tak"));
         this.form.Fields.push(new CheckboxField("no", "Nie"));
         this.form.Fields.push(new TextAreaField("comments", "Uwagi"));
-        const key = (new LocStorage).saveForm(this.form.Fields);
-        document.body.innerHTML += this.render();
-        console.log(this.render());
     }
     render() {
         this.form.render();

@@ -9,13 +9,17 @@ export class DocumentList {
         return this.documentList;
     }
     render() {
-        let table = `<table class ="documentList">`;
-        this.getDocumentList();
-        this.documentList.forEach((key) => {
-            table += `<tr><th>${key}</th></tr>`;
+        const div = document.createElement('div');
+        const table = document.createElement('table');
+        this.getDocumentList().forEach((key) => {
+            const tr = document.createElement('tr');
+            const td = document.createElement('td');
+            td.appendChild(document.createTextNode(key));
+            tr.appendChild(td);
+            table.appendChild(tr);
         });
-        table += `</table>`;
-        return table;
+        div.appendChild(table);
+        document.body.appendChild(div);
     }
 }
 //# sourceMappingURL=DocumentList.js.map

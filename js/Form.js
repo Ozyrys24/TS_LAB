@@ -19,8 +19,15 @@ export class Form {
         });
         const saveButton = document.createElement('button');
         saveButton.innerText = "Zapisz";
-        saveButton.addEventListener('click', () => new LocStorage().saveDocument(this.getValue()));
+        saveButton.addEventListener('click', () => {
+            (new LocStorage()).saveDocument(this.getValue());
+            window.location.href = '/index.html';
+        });
         div.appendChild(saveButton);
+        const backButton = document.createElement('button');
+        backButton.innerText = "Wstecz";
+        backButton.addEventListener('click', () => window.location.href = '/index.html');
+        div.appendChild(backButton);
     }
 }
 //# sourceMappingURL=Form.js.map

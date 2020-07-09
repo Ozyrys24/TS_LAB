@@ -8,8 +8,11 @@
 
 <body>
     
-    <a href="./document-list.html">Lista Dokumentów</a>
-    <a href="./new-document.html">Nowy Dokument</a>
+    <script type="module">
+        import {App} from "./js/App.js";
+        const app = new App();
+        app.render();
+    </script>
 
 </body>
 </html>

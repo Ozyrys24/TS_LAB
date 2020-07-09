@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-
 <body>
-    
-    <a href="./document-list.html">Lista Dokumentów</a>
-    <a href="./new-document.html">Nowy Dokument</a>
-
+    <script type="module">
+        import {DocumentList} from "./js/DocumentList.js";
+        const documentList = new DocumentList();
+        documentList.render();
+    </script>
 </body>
 </html>

@@ -31,9 +31,7 @@ export class App {
     this.form.Fields.push(new CheckboxField("no","Nie"));
     this.form.Fields.push(new TextAreaField("comments","Uwagi"));
 
-    const key: string = (new LocStorage).saveForm(this.form.Fields);
-    document.body.innerHTML += this.render();
-    console.log(this.render());
+  //  const key: string = (new LocStorage).saveForm(this.form.Fields);
 
    // (document.querySelector("#save") as HTMLElement).addEventListener("click",() => this.form.getValue(key),false);
    // (document.querySelector("#showDocuments") as HTMLElement).addEventListener("click",() => document.body.innerHTML += (new DocumentList).render(),false);

@@ -10,15 +10,19 @@ export class DocumentList {
         return this.documentList;
     }
 
-    render(): string {
-        let table: string = `<table class ="documentList">`;
-
-        this.getDocumentList();
-        this.documentList.forEach((key) => {
-            table += `<tr><th>${key}</th></tr>`
+    render(): void {
+        const div: HTMLDivElement = document.createElement('div');
+        const table: HTMLTableElement = document.createElement('table');
+        
+        this.getDocumentList().forEach((key) => {
+           const tr: HTMLTableRowElement  =  document.createElement('tr');
+           const td: HTMLTableCellElement =  document.createElement('td');
+           td.appendChild(document.createTextNode(key));
+           tr.appendChild(td);
+           table.appendChild(tr);
         });
-
-        table += `</table>`;
-        return table;
+        
+        div.appendChild(table);
+        document.body.appendChild(div);
     }
 }
