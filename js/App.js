@@ -12,12 +12,11 @@ export class App {
         this.form.Fields.push(new InputField("name", 'Imie'));
         this.form.Fields.push(new InputField("surname", "Nazwisko"));
         this.form.Fields.push(new EmailField("email", "Podaj swój email"));
-        const fieldOfStudy = [
-            new SelectOptionField("iie", "Informatyka i ekonometria", "iie"),
-            new SelectOptionField("e", "Ekonometria", "e")
-        ];
-        this.form.Fields.push(new SelectField("fieldOfStudy", "Jaki kierunek studiów wybierzesz?", fieldOfStudy));
-        this.form.Fields.push(new FieldLabel("choice", "Czy Preferujesz e-learning?", true));
+        const select = new SelectField("fieldOfStudy", "Jaki kierunek studiów wybierzesz?");
+        select.addOption(new SelectOptionField("iie", "Informatyka i ekonometria", "iie"));
+        select.addOption(new SelectOptionField("e", "Ekonometria", "e"));
+        this.form.Fields.push(select);
+        this.form.Fields.push(new FieldLabel("choice", "Czy Preferujesz e-learning?"));
         this.form.Fields.push(new CheckboxField("yes", "Tak"));
         this.form.Fields.push(new CheckboxField("no", "Nie"));
         this.form.Fields.push(new TextAreaField("comments", "Uwagi"));

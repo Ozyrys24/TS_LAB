@@ -6,7 +6,7 @@ export class EmailField implements Field {
 
     Name: string;
     Label: string;
-    Type: FieldType = FieldType.DateField;
+    Type: FieldType = FieldType.EmailField;
     Value: string;
     TypeField: HTMLInputElement = document.createElement('input');
     LabelField: FieldLabel = new FieldLabel("","");

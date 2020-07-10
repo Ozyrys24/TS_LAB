@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script type="module">
+        import {Router} from "./js/Router.js";
+        import {DocumentList} from "./js/DocumentList.js";
+        import {Form} from "./js/Form.js";
+
+        const key = Router.getParam();
+        const documet = (new DocumentList).getDocumentId(key);
+        const form = new Form();
+        form.Fields = documet;
+        form.render();
+    </script>
+</body>
+</html>

@@ -1,14 +1,15 @@
 import { FieldType } from "./FieldType.js";
 import { FieldLabel } from "./FieldLabel.js";
 export class SelectField {
-    constructor(name, label = "", options = [], value = "") {
-        this.Type = FieldType.DateField;
+    constructor(name, label = "", value = "") {
+        this.Type = FieldType.SelectField;
+        this.Options = [];
+        this.JsonOption = "";
         this.TypeField = document.createElement('select');
         this.LabelField = new FieldLabel("", "");
         this.Name = name;
         this.Label = label;
         this.Value = value;
-        this.Options = options;
         this.LabelField.Label = this.Label;
         this.LabelField.Name = this.Name;
     }
@@ -16,14 +17,13 @@ export class SelectField {
         this.LabelField.render(div);
         div.appendChild(document.createElement('br'));
         this.TypeField.setAttribute('name', this.Name);
-        this.TypeField.setAttribute('value', this.Value);
         this.Options.forEach(option => option.addOption(this.TypeField));
+        this.TypeField.selectedIndex = Number(this.Value);
         div.appendChild(this.TypeField);
         div.appendChild(document.createElement('br'));
     }
     getValue() {
-        var _a;
-        return (_a = this.TypeField.options.item(this.TypeField.selectedIndex)) === null || _a === void 0 ? void 0 : _a.innerText;
+        return this.TypeField.selectedIndex + "";
     }
     addOption(option) {
         this.Options.push(option);

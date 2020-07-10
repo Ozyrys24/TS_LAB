@@ -2,7 +2,7 @@ import { FieldType } from "./FieldType.js";
 import { FieldLabel } from "./FieldLabel.js";
 export class TextAreaField {
     constructor(name, label = "", value = "") {
-        this.Type = FieldType.DateField;
+        this.Type = FieldType.TextAreaField;
         this.TypeField = document.createElement('textarea');
         this.LabelField = new FieldLabel("", "");
         this.Name = name;
@@ -15,7 +15,7 @@ export class TextAreaField {
         this.LabelField.render(div);
         div.appendChild(document.createElement('br'));
         this.TypeField.setAttribute('name', this.Name);
-        this.TypeField.setAttribute('value', this.Value);
+        this.TypeField.innerText = this.Value;
         div.appendChild(this.TypeField);
         div.appendChild(document.createElement('br'));
     }

@@ -2,7 +2,7 @@ import { FieldType } from "./FieldType.js";
 import { FieldLabel } from "./FieldLabel.js";
 export class InputField {
     constructor(name, label = "", value = "") {
-        this.Type = FieldType.DateField;
+        this.Type = FieldType.InputField;
         this.TypeField = document.createElement('input');
         this.LabelField = new FieldLabel("", "");
         this.Name = name;

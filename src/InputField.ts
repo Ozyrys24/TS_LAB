@@ -5,7 +5,7 @@ import { FieldLabel } from "./FieldLabel.js";
 export class InputField implements Field {
     Name: string;
     Label: string;
-    Type: FieldType = FieldType.DateField;
+    Type: FieldType = FieldType.InputField;
     Value: string;
     TypeField: HTMLInputElement = document.createElement('input');
     LabelField: FieldLabel = new FieldLabel("","");

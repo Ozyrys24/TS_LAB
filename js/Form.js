@@ -20,7 +20,7 @@ export class Form {
         const saveButton = document.createElement('button');
         saveButton.innerText = "Zapisz";
         saveButton.addEventListener('click', () => {
-            (new LocStorage()).saveDocument(this.getValue());
+            (new LocStorage()).saveDocument(this.Fields);
             window.location.href = '/index.html';
         });
         div.appendChild(saveButton);

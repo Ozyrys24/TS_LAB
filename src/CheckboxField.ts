@@ -8,8 +8,9 @@ export class CheckboxField implements Field {
 
     Name: string;
     Label: string;
-    TypeField: HTMLInputElement = document.createElement('input');
+    Type: FieldType = FieldType.CheckboxField;
     Value: string;
+    TypeField: HTMLInputElement = document.createElement('input');
     LabelField: FieldLabel = new FieldLabel("","");
     
     constructor(name: string, label: string = "",  value: string = "") {
@@ -19,12 +20,11 @@ export class CheckboxField implements Field {
         this.LabelField.Label = this.Label;
         this.LabelField.Name = this.Name;
     }
-    Type: any = "";
 
     render(div: HTMLDivElement): void {
     this.TypeField.setAttribute("type", "checkbox")
     this.TypeField.setAttribute('name',this.Name);
-    this.TypeField.setAttribute('value',this.Value);
+    this.TypeField.checked = (this.Value === "true");
     div.appendChild(this.TypeField);
     this.LabelField.render(div);
     div.appendChild(document.createElement('br'));

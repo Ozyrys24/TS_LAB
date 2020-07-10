@@ -13,13 +13,35 @@ export class DocumentList {
         const table = document.createElement('table');
         this.getDocumentList().forEach((key) => {
             const tr = document.createElement('tr');
-            const td = document.createElement('td');
+            let td = document.createElement('td');
             td.appendChild(document.createTextNode(key));
             tr.appendChild(td);
+            td = document.createElement('td');
+            const editDocument = document.createElement('a');
+            editDocument.href = `./edit-document.html?id=${key}`;
+            editDocument.innerText = `Edit`;
+            td.appendChild(editDocument);
+            tr.appendChild(td);
+            td = document.createElement('td');
+            const removeDocument = document.createElement('button');
+            removeDocument.innerText = `Delete`;
+            removeDocument.addEventListener('click', () => {
+                this.removeDocument(key);
+                tr.remove();
+            });
+            td.appendChild(removeDocument);
+            tr.appendChild(td);
             table.appendChild(tr);
+            console.table(this.getDocumentId(key));
         });
         div.appendChild(table);
         document.body.appendChild(div);
+    }
+    removeDocument(key) {
+        localStorage.removeItem(key);
+    }
+    getDocumentId(key) {
+        return this.locStorage.loadDocument(key);
     }
 }
 //# sourceMappingURL=DocumentList.js.map

@@ -1,11 +1,12 @@
-export class FieldType {
-}
-FieldType.InputField = document.createElement('input');
-FieldType.TextAreaField = document.createElement('textarea');
-FieldType.DateField = FieldType.InputField.setAttribute("type", "date");
-FieldType.EmailField = FieldType.InputField.setAttribute("type", "email");
-FieldType.SelectField = document.createElement('select');
-FieldType.FieldLabel = document.createElement('label');
-FieldType.SelectOptionField = document.createElement('option');
-FieldType.CheckboxField = FieldType.InputField.setAttribute("type", "checkbox");
+export var FieldType;
+(function (FieldType) {
+    FieldType[FieldType["InputField"] = 0] = "InputField";
+    FieldType[FieldType["TextAreaField"] = 1] = "TextAreaField";
+    FieldType[FieldType["DateField"] = 2] = "DateField";
+    FieldType[FieldType["EmailField"] = 3] = "EmailField";
+    FieldType[FieldType["SelectField"] = 4] = "SelectField";
+    FieldType[FieldType["FieldLabel"] = 5] = "FieldLabel";
+    FieldType[FieldType["SelectOptionField"] = 6] = "SelectOptionField";
+    FieldType[FieldType["CheckboxField"] = 7] = "CheckboxField";
+})(FieldType || (FieldType = {}));
 //# sourceMappingURL=FieldType.js.map

@@ -19,7 +19,6 @@ export class DateField implements Field {
         this.LabelField.Name = this.Name;
     }
     
-    
     render(div: HTMLDivElement): void {
         this.LabelField.render(div);
         this.TypeField.setAttribute("type", "date")
