@@ -8,35 +8,40 @@ import { CheckboxField } from "./CheckboxField.js";
 import { TextAreaField } from "./TextAreaField.js";
 import { DocumentList } from "./DocumentList.js";
 import { LocStorage } from "./LocStorage.js";
+import { FormCreator } from "./FormCreator.js";
+import { FieldType } from "./FieldType.js";
 
 export class App {
     form: Form = new Form();
     
     constructor() {
 
-    this.form.Fields.push(new InputField("name",'Imie'));
+        const name = new InputField('name','Podaj nazwę fomularza');
+        const label = new InputField('label','Podaj nazwę etykiety');
+        const kindOfField = new SelectField('king','Podaj rodzaj fomularza');
+        for(let index: number = 0; index < Object.keys(FieldType).length / 2; index++) {
+            kindOfField.addOption(new SelectOptionField(index + "", FieldType[index], index + ""));  
+        }
 
-    this.form.Fields.push(new InputField("surname","Nazwisko"));
+        console.log(Object.keys(FieldType));
 
-    this.form.Fields.push(new EmailField("email","Podaj swój email"));
-    
-    const select = new SelectField("fieldOfStudy", "Jaki kierunek studiów wybierzesz?");
-    select.addOption(new SelectOptionField("iie", "Informatyka i ekonometria","iie"));
-    select.addOption(new SelectOptionField("e", "Ekonometria","e"));
+        const div = document.createElement('div');
+        div.classList.add('Form');
 
-    this.form.Fields.push(select);
+        name.render(div);
+        label.render(div);
+        kindOfField.render(div);
+        
+        const addButton = document.createElement('button');
+        addButton.innerText = "Dodaj";
+        addButton.addEventListener('click',() => {
+            const newForm = (new FormCreator(name.getValue(),label.getValue()).newForm(Number(kindOfField.getValue())));
+            newForm.render(div);
+            this.form.Fields.push(newForm);
+        });
+        div.appendChild(addButton);
 
-    this.form.Fields.push(new FieldLabel("choice","Czy Preferujesz e-learning?"));
-    this.form.Fields.push(new CheckboxField("yes","Tak"));
-    this.form.Fields.push(new CheckboxField("no","Nie"));
-    this.form.Fields.push(new TextAreaField("comments","Uwagi"));
-
-  //  const key: string = (new LocStorage).saveForm(this.form.Fields);
-
-   // (document.querySelector("#save") as HTMLElement).addEventListener("click",() => this.form.getValue(key),false);
-   // (document.querySelector("#showDocuments") as HTMLElement).addEventListener("click",() => document.body.innerHTML += (new DocumentList).render(),false);
-
-
+        document.body.appendChild(div);
     }
 
     render(): void {

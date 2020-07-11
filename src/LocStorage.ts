@@ -20,7 +20,7 @@ export class LocStorage implements DataStorage {
     //     return key;
     // }
 
-    saveDocument(document:  Field[]): string {
+    saveDocument(document:  Field[],key: string = ""): string {
         
         const fields: [string,string,string,number, string][] = [];
         document.forEach(field => { 
@@ -40,11 +40,26 @@ export class LocStorage implements DataStorage {
             }    
         });
         const jsonDocument: string = JSON.stringify(fields);
-        const key: string = `document-${Date.now()}`;
-
+        //console.log("Key => " + key + " " + key == "");
+        
+        if(key == "") {
+            key = `document-${Date.now()}`;
+        }
+        else{
+            localStorage.removeItem(key);
+        }
+        //this.sleep(10000);
         localStorage.setItem(key,jsonDocument);
         return key;
     }
+
+    sleep(milliseconds: number) {
+        const date = Date.now();
+        let currentDate = null;
+        do {
+          currentDate = Date.now();
+        } while (currentDate - date < milliseconds);
+      }
 
     saveForm(fields: Field[]): string {
         const jsonForm: string = JSON.stringify(fields);

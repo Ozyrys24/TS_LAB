@@ -16,7 +16,7 @@ export class Form {
         return result;
     }
 
-    render(): void {
+    render(key: string = ""): void {
         const div = document.createElement('div');
         document.body.appendChild(div);
 
@@ -27,7 +27,7 @@ export class Form {
         const saveButton = document.createElement('button');
         saveButton.innerText = "Zapisz";
         saveButton.addEventListener('click',() =>{
-             (new LocStorage()).saveDocument(this.Fields);
+             (new LocStorage()).saveDocument(this.Fields, key);
              window.location.href = '/index.html';
         });
         div.appendChild(saveButton);

@@ -8,7 +8,7 @@ import { InputField } from "./InputField.js";
 import { TextAreaField } from "./TextAreaField.js";
 import { SelectOptionField } from "./SelectOptionField.js";
 export class LocStorage {
-    saveDocument(document) {
+    saveDocument(document, key = "") {
         const fields = [];
         document.forEach(field => {
             field.Value = field.getValue();
@@ -25,9 +25,21 @@ export class LocStorage {
             }
         });
         const jsonDocument = JSON.stringify(fields);
-        const key = `document-${Date.now()}`;
+        if (key == "") {
+            key = `document-${Date.now()}`;
+        }
+        else {
+            localStorage.removeItem(key);
+        }
         localStorage.setItem(key, jsonDocument);
         return key;
+    }
+    sleep(milliseconds) {
+        const date = Date.now();
+        let currentDate = null;
+        do {
+            currentDate = Date.now();
+        } while (currentDate - date < milliseconds);
     }
     saveForm(fields) {
         const jsonForm = JSON.stringify(fields);

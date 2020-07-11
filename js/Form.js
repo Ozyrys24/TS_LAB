@@ -11,7 +11,7 @@ export class Form {
         console.table(result);
         return result;
     }
-    render() {
+    render(key = "") {
         const div = document.createElement('div');
         document.body.appendChild(div);
         this.Fields.forEach((field) => {
@@ -20,7 +20,7 @@ export class Form {
         const saveButton = document.createElement('button');
         saveButton.innerText = "Zapisz";
         saveButton.addEventListener('click', () => {
-            (new LocStorage()).saveDocument(this.Fields);
+            (new LocStorage()).saveDocument(this.Fields, key);
             window.location.href = '/index.html';
         });
         div.appendChild(saveButton);
