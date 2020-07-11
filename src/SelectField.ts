@@ -41,7 +41,10 @@ export class SelectField implements Field {
         this.Options.push(option);
     }
 
-
+    deleteOption(option: SelectOptionField): void {
+        this.Options = this.Options.filter(o => o.Value != option.Value);
+        option.deleteOption(this.TypeField);
+    }
     
 
 }

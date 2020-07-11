@@ -37,7 +37,13 @@ export class App {
                     selectOption.addOption(newForm.TypeField);
                     newForm.addOption(selectOption);
                 });
+                const deleteOption = document.createElement('button');
+                deleteOption.innerText = 'Usuń Opcję';
+                deleteOption.addEventListener('click', function (event) {
+                    newForm.deleteOption((newForm.Options[+newForm.getValue()]));
+                });
                 divForm.appendChild(addOption);
+                divForm.appendChild(deleteOption);
             }
             this.form.Fields.push(newForm);
         });

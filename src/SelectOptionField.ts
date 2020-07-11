@@ -22,4 +22,10 @@ export class SelectOptionField {
         select.appendChild(this.TypeField);
     }
 
+    deleteOption(select: HTMLSelectElement): void {
+        select.removeChild(this.TypeField);
+    }
+
+    
+
 }

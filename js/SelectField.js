@@ -28,5 +28,9 @@ export class SelectField {
     addOption(option) {
         this.Options.push(option);
     }
+    deleteOption(option) {
+        this.Options = this.Options.filter(o => o.Value != option.Value);
+        option.deleteOption(this.TypeField);
+    }
 }
 //# sourceMappingURL=SelectField.js.map

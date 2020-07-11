@@ -43,14 +43,24 @@ export class App {
             const newForm = (new FormCreator(name.getValue(),label.getValue()).newForm(Number(kindOfField.getValue())));
             newForm.render(divForm);
             if(newForm.Type == FieldType.SelectField) {
+
                 const addOption = document.createElement('button');
                 addOption.innerText = 'Dodaj Opcję';
                 addOption.addEventListener('click', function(event) {
                     const selectOption = new SelectOptionField(name.getValue(), label.getValue(),(newForm as SelectField).Options.length + "");
                     selectOption.addOption((newForm as SelectField).TypeField);
+                    
                     (newForm as SelectField).addOption(selectOption);
                 });
+
+                const deleteOption = document.createElement('button');
+                deleteOption.innerText = 'Usuń Opcję';
+                deleteOption.addEventListener('click', function(event) {
+                    (newForm as SelectField).deleteOption(((newForm as SelectField).Options[+newForm.getValue()]));
+                });
+
                 divForm.appendChild(addOption);
+                divForm.appendChild(deleteOption);
             }   
             this.form.Fields.push(newForm);
         });

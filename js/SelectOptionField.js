@@ -14,5 +14,8 @@ export class SelectOptionField {
         this.TypeField.innerText = this.Label;
         select.appendChild(this.TypeField);
     }
+    deleteOption(select) {
+        select.removeChild(this.TypeField);
+    }
 }
 //# sourceMappingURL=SelectOptionField.js.map
