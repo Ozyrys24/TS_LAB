@@ -27,6 +27,7 @@ export class SelectField {
     }
     addOption(option) {
         this.Options.push(option);
+        option.addOption(this.TypeField);
     }
     deleteOption(option) {
         this.Options = this.Options.filter(o => o.Value != option.Value);

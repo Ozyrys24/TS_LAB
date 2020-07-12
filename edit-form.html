@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script type="module">
+        import {Router} from "./js/Router.js";
+        import {FormList} from "./js/FormList.js";
+        import {Form} from "./js/Form.js";
+        import {FormCreator} from "./js/FormCreator.js";
+
+        const key = Router.getParam();
+        const newForm = (new FormList).getFormId(key);
+        const form = new Form();
+        const formCreator = new FormCreator();
+        formCreator.Key = key; 
+        formCreator.render(form.Fields, key)
+
+    </script>
+</body>
+</html>

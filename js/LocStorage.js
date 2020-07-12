@@ -34,23 +34,72 @@ export class LocStorage {
         localStorage.setItem(key, jsonDocument);
         return key;
     }
-    sleep(milliseconds) {
-        const date = Date.now();
-        let currentDate = null;
-        do {
-            currentDate = Date.now();
-        } while (currentDate - date < milliseconds);
-    }
-    saveForm(fields) {
-        const jsonForm = JSON.stringify(fields);
-        const key = `form-${Date.now()}`;
-        localStorage.setItem(key, jsonForm);
+    saveForm(document, key = "") {
+        const fields = [];
+        document.forEach(field => {
+            if (field.Type == FieldType.SelectField) {
+                const options = [];
+                field.Options.forEach(option => {
+                    options.push([option.Name, option.Label, option.Value]);
+                });
+                const jsonOption = JSON.stringify(options);
+                fields.push([field.Name, field.Label, field.Type, jsonOption]);
+            }
+            else {
+                fields.push([field.Name, field.Label, field.Type, ""]);
+            }
+        });
+        const jsonform = JSON.stringify(fields);
+        if (key == "") {
+            key = `form-${Date.now()}`;
+        }
+        else {
+            localStorage.removeItem(key);
+        }
+        localStorage.setItem(key, jsonform);
         return key;
     }
-    loadForm(id) {
-        const jsonForm = localStorage.getItem(id);
-        const fields = JSON.parse(jsonForm);
-        return fields;
+    loadForm(key) {
+        const fieldArray = [];
+        const jsonDocument = localStorage.getItem(key);
+        const fields = JSON.parse(jsonDocument);
+        fields.forEach(field => {
+            switch (field[2]) {
+                case FieldType.CheckboxField:
+                    const checkbox = new CheckboxField(field[0], field[1]);
+                    fieldArray.push(checkbox);
+                    break;
+                case FieldType.DateField:
+                    const date = new DateField(field[0], field[1]);
+                    fieldArray.push(date);
+                    break;
+                case FieldType.EmailField:
+                    const email = new EmailField(field[0], field[1]);
+                    fieldArray.push(email);
+                    break;
+                case FieldType.FieldLabel:
+                    const label = new FieldLabel(field[0], field[1]);
+                    fieldArray.push(label);
+                    break;
+                case FieldType.InputField:
+                    const text = new InputField(field[0], field[1]);
+                    fieldArray.push(text);
+                    break;
+                case FieldType.SelectField:
+                    const select = new SelectField(field[0], field[1], "0");
+                    const options = JSON.parse(field[3]);
+                    options.forEach(option => {
+                        select.addOption(new SelectOptionField(option[0], option[1], option[2]));
+                    });
+                    fieldArray.push(select);
+                    break;
+                case FieldType.TextAreaField:
+                    const textarea = new TextAreaField(field[0], field[1]);
+                    fieldArray.push(textarea);
+                    break;
+            }
+        });
+        return fieldArray;
     }
     loadDocument(key) {
         const fieldArray = [];

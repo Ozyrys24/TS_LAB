@@ -7,7 +7,7 @@ export enum FieldType {
     EmailField,
     SelectField,
     FieldLabel,
-    SelectOptionField,
     CheckboxField,
+    SelectOptionField
 }
 

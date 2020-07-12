@@ -5,14 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-
 <body>
-    
     <script type="module">
-        import {App} from "./js/App.js";
-        const app = new App();
-//        app.render();
+        import {FormList} from "./js/FormList.js";
+        import {Router} from "./js/Router.js";
+        import {Form} from "./js/Form.js";
+        const formList = new FormList();
+        const key = Router?.getParam();
+        console.log(key);
+        if(key == null) {
+            formList.fillRender();
+        }
+        else
+        {
+            const document = (new FormList).getFormId(key);
+            const form = new Form();
+            form.Fields = document;
+            form.render();
+        }
     </script>
-
 </body>
 </html>

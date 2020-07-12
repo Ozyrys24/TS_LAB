@@ -6,7 +6,7 @@ export var FieldType;
     FieldType[FieldType["EmailField"] = 3] = "EmailField";
     FieldType[FieldType["SelectField"] = 4] = "SelectField";
     FieldType[FieldType["FieldLabel"] = 5] = "FieldLabel";
-    FieldType[FieldType["SelectOptionField"] = 6] = "SelectOptionField";
-    FieldType[FieldType["CheckboxField"] = 7] = "CheckboxField";
+    FieldType[FieldType["CheckboxField"] = 6] = "CheckboxField";
+    FieldType[FieldType["SelectOptionField"] = 7] = "SelectOptionField";
 })(FieldType || (FieldType = {}));
 //# sourceMappingURL=FieldType.js.map

@@ -39,6 +39,7 @@ export class SelectField implements Field {
 
     addOption(option: SelectOptionField) {
         this.Options.push(option);
+        option.addOption(this.TypeField);
     }
 
     deleteOption(option: SelectOptionField): void {

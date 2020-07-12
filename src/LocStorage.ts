@@ -53,26 +53,80 @@ export class LocStorage implements DataStorage {
         return key;
     }
 
-    sleep(milliseconds: number) {
-        const date = Date.now();
-        let currentDate = null;
-        do {
-          currentDate = Date.now();
-        } while (currentDate - date < milliseconds);
-      }
-
-    saveForm(fields: Field[]): string {
-        const jsonForm: string = JSON.stringify(fields);
-        const key: string = `form-${Date.now()}`;
-
-        localStorage.setItem(key,jsonForm);
+    saveForm(document:  Field[],key: string = ""): string {
+        
+        const fields: [string,string,number,string][] = [];
+        document.forEach(field => { 
+            if(field.Type == FieldType.SelectField)
+            {
+                const options: [string,string,string][] = [];
+                (field as SelectField).Options.forEach(option => {
+                    options.push([option.Name,option.Label,option.Value])
+                });
+                const jsonOption: string = JSON.stringify(options);
+                fields.push([field.Name,field.Label,field.Type,jsonOption])
+            }
+            else
+            {
+                fields.push([field.Name,field.Label,field.Type,""]);
+            }    
+        });
+        const jsonform: string = JSON.stringify(fields);
+        //console.log("Key => " + key + " " + key == "");
+        
+        if(key == "") {
+            key = `form-${Date.now()}`;
+        }
+        else{
+            localStorage.removeItem(key);
+        }
+        //this.sleep(10000);
+        localStorage.setItem(key,jsonform);
         return key;
     }
 
-    loadForm(id: string): any {
-        const jsonForm: string | null = localStorage.getItem(id);
-        const fields: any = JSON.parse(jsonForm as string);
-        return fields;
+    loadForm(key: string): Field[] {
+        const fieldArray: Field[] = [];
+        const jsonDocument: string | null = localStorage.getItem(key);
+        const fields: [string, string, number, string][] = JSON.parse(jsonDocument as string);
+         
+        fields.forEach(field => {
+            switch(field[2]){
+                case FieldType.CheckboxField:
+                    const checkbox = new CheckboxField(field[0],field[1]);
+                    fieldArray.push(checkbox);
+                    break;
+                case FieldType.DateField:
+                    const date = new DateField(field[0],field[1]);
+                    fieldArray.push(date);
+                    break;
+                case FieldType.EmailField:
+                    const email = new EmailField(field[0],field[1]);
+                    fieldArray.push(email);
+                    break;
+                case FieldType.FieldLabel:
+                    const label = new FieldLabel(field[0],field[1]);
+                    fieldArray.push(label);
+                    break;
+                case FieldType.InputField:
+                    const text = new InputField(field[0],field[1]);
+                    fieldArray.push(text);
+                    break;
+                case FieldType.SelectField:
+                    const select = new SelectField(field[0],field[1],"0");
+                    const options: [string, string,string][] = JSON.parse(field[3]);
+                    options.forEach(option => {
+                        select.addOption(new SelectOptionField(option[0], option[1], option[2]))
+                    });
+                    fieldArray.push(select);
+                    break;
+                case FieldType.TextAreaField:
+                    const textarea = new TextAreaField(field[0],field[1]);
+                    fieldArray.push(textarea);
+                    break;                   
+            }       
+        });
+       return fieldArray;
      }
 
     loadDocument(key: string): Field[] {
